@@ -1,0 +1,6 @@
+@RazorERPWebAPI_HostAddress = http://localhost:5248
+
+GET {{RazorERPWebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
