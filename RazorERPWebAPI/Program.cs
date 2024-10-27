@@ -4,8 +4,12 @@ using System.Text;
 using RazorERPWebAPI.Repository;
 using RazorERPWebAPI.Services;
 using RazorERPWebAPI.Middleware;
+using RazorERPWebAPI.Dapper;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Register DapperContext as a singleton service
+builder.Services.AddSingleton<DapperContext>();
 
 // JWT Configuration
 builder.Services.AddAuthentication(options =>
