@@ -16,8 +16,8 @@
         public async Task InvokeAsync(HttpContext context)
         {
             // Extract the username from the current user's identity
-            //var username = context.User.Identity.Name;
-            var username = "test3";
+            var username = context.User.Identity.Name;
+            //var username = "test3";
             // If the user is not authenticated, proceed with the request without throttling
             if (username == null)
             {

@@ -17,13 +17,14 @@ namespace RazorERPWebAPI.Services
         }
             
         public Task<string> GenerateToken(User user)
-        {
+                                                                                                                                                {
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-            new Claim(ClaimTypes.Role, user.Roles),
-            new Claim("CompanyId", user.CompanyId.ToString()),
-            //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(ClaimTypes.Name, user.Username),
+                // Make sure this matches "Admin" in [Authorize]
+                new Claim(ClaimTypes.Role, "Admin"), 
+                // Custom claim for CompanyId
+                new Claim("CompanyId", user.CompanyId.ToString()) 
         };
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

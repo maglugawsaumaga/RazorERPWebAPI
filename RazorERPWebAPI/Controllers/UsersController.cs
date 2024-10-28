@@ -6,6 +6,7 @@ using RazorERPWebAPI.Services;
 
 namespace RazorERPWebAPI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
@@ -20,14 +21,14 @@ namespace RazorERPWebAPI.Controllers
             _authService = authService;
             _passwordHasherService = passwordHasherService;
         }
-
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            //var companyId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "CompanyId")?.Value);
-            //var isAdmin = User.IsInRole("Admin");
-            var companyId = 1;
-            var isAdmin = false;
+            var companyId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "CompanyId")?.Value);
+            var isAdmin = User.IsInRole("Admin");
+            //var companyId = 1;
+            //var isAdmin = false;
             var users = await _userRepository.GetUsersByCompany(companyId, isAdmin);
             return Ok(users);
         }
